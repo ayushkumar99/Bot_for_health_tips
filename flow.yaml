@@ -1,0 +1,69 @@
+# Version format ex. "0.0.1"
+version: "1.0.0"                            # Flow specification version
+
+# Basic metadata for the agent
+metadata:
+  name: "Personalized-Wellness-Checkin"           # Unique identifier
+  description: "A flow to provide personalized wellness check-ins and tips based on user input." 
+  author: "ayushkr"                              # Must match your account username
+  tags: [wellness, health, mood-tracking, tips]     # Keywords for categorization
+  private: false                                    # Access control setting
+
+# Define the input variables required
+inputs:
+  mood:                                              # User's mood input
+    type: string                                     # Currently only String format
+    description: "Describe your current mood (e.g., happy, stressed, tired)."
+    required: true
+    example: "happy"
+  energy_level:                                      # User's energy level input
+    type: string
+    description: "Describe your energy level (e.g., high, moderate, low)."
+    required: true
+    example: "low"
+  hydration_status:                                  # User's hydration input
+    type: string
+    description: "Have you been drinking water adequately today? (e.g., yes, no, unsure)"
+    required: false
+    example: "yes"
+
+# LLM configuration
+model:
+  provider: "anthropic" # e.g., anthropic, openai, meta, etc.
+  name: "claude-3.5-sonnet"   
+
+# Dataset configuration (Optional)
+# dataset:
+#   source: "ayushkr/wellness-checkin-dataset"     # Make sure this dataset exists
+
+# Prompt template configuration
+prompt: |
+  You are a wellness assistant. Your task is to analyze user inputs about their mood, energy level, and hydration status to provide personalized wellness tips.
+
+  Mood: {mood}
+  Energy Level: {energy_level}
+  Hydration Status: {hydration_status}
+
+  Based on this information:
+  - Suggest activities to improve mood.
+  - Recommend ways to manage energy levels.
+  - Offer hydration tips if necessary.
+
+  Provide actionable advice in a friendly and encouraging tone.
+
+# ReadME configuration
+readme: |
+  ## Personalized Wellness Check-In
+
+  This flow gathers user input about their current mood, energy level, and hydration status, then provides tailored wellness tips to improve their day.
+
+  ### Inputs
+  - **Mood**: Describe your mood (e.g., happy, stressed).
+  - **Energy Level**: Describe your energy level (e.g., high, low).
+  - **Hydration Status**: Indicate if you are well-hydrated (optional).
+
+  ### Outputs
+  - Personalized suggestions for mood enhancement, energy management, and hydration.
+
+  ### Usage
+  Deploy this flow and interact with it via a user interface to receive daily wellness tips!
